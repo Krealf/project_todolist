@@ -1,5 +1,6 @@
 // Globals
 const todoList = document.querySelector("#todo-list");
+const userList = document.querySelector("#user-todo");
 let todos = [];
 let users = [];
 
@@ -32,6 +33,14 @@ function printTodo({ id, userId, title, completed }) {
   todoList.prepend(li);
 }
 
+function createUserOption(user) {
+  const option = document.createElement("option");
+  option.value = user.id;
+  option.innerText = user.name;
+
+  userList.append(option);
+}
+
 // Event Logic
 async function initApp() {
   try {
@@ -40,6 +49,7 @@ async function initApp() {
     todos.forEach((todo) => {
       printTodo(todo);
     });
+    users.forEach((user) => createUserOption(user));
   } catch (error) {
     console.error("Error initializing app:", error);
   }
